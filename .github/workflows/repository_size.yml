@@ -6,6 +6,6 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          ${{github.repository}}
+            repository: '${{github.repository}}'
       - run: echo "branch"
       - run: du -skh --exclude=".git"
