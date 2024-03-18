@@ -1,0 +1,11 @@
+name: GitHub Action fetch
+on: [push]
+jobs:
+  Explore-GitHub-Actions:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ${{github.repository}}
+      - run: echo "branch"
+      - run: du -skh --exclude=".git"
