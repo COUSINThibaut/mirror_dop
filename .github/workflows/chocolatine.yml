@@ -22,10 +22,12 @@ jobs:
       - run: check.sh $(pwd) $(pwd)
       - name: norme
         run: |
-          IFS=$'\n'
-          while read line; do echo "::error, line=substring=${line:7:5}::$line"; done < $FICHIER
-      - run: |
-          if cat $FICHIER | wc -l > 0; then exit 1; fi
+          if cat $FICHIER | wc -l > 0
+          then
+            IFS=$'\n'
+            while read line; do echo "::error, line=substring=${line:7:5}::$line"; done < $FICHIER
+            exit 1
+          fi
 
   check_program_compilation:
     needs: check_coding_style
