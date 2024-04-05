@@ -25,7 +25,7 @@ jobs:
           while read line; do echo "::error, line=substring=${line:7:5}::$line"; done < $FICHIER
       - name: norme
         run: |
-          if cat $FICHIER | wc -l > 0; then exit 1; fi
+          if cat $FICHIER | wc -l > 0; then exit 2; fi
 
   check_program_compilation:
     needs: check_coding_style
