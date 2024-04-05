@@ -24,7 +24,7 @@ jobs:
           if [ -s $FICHIER ]
           then 
             IFS=$'\n'
-            while read line; do echo "::error, line=substring=${line:7:5}::$line"; done < $FICHIER
+            while read line; do echo "::error ::$line"; done < $FICHIER
             exit 1
           else echo "no coding style error"; fi
 
