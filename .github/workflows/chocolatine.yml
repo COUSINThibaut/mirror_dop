@@ -17,7 +17,7 @@ jobs:
     runs-on: ubuntu-latest
     container: ghcr.io/epitech/coding-style-checker:latest 
     steps:
-      - name: root
+      - name: checkout
         uses: actions/checkout@v4
       - name: exec norme
         run: check.sh $(pwd) $(pwd)
@@ -26,7 +26,7 @@ jobs:
           if [ -s $FICHIER ]
           then 
             IFS=$'\n'
-            while read line; do echo "::error ::$line"; done < $FICHIER
+            while read line; do echo "::error,title={&line}"; done < $FICHIER
             exit 1
           else echo "no coding style error"; fi
 
@@ -36,7 +36,7 @@ jobs:
     timeout-minutes: 2
     container: epitechcontent/epitest-docker
     steps:
-      - name: root
+      - name: checkout
         uses: actions/checkout@v4
       - name: make and make clean
         run: make && make clean
