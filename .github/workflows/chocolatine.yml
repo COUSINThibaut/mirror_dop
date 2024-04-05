@@ -22,7 +22,7 @@ jobs:
       - run: check.sh $(pwd) $(pwd)
       - name: norme
         run: |
-          if cat $FICHIER | wc -l > 0
+          if cat coding-style-reports.log | wc -l > 0
           then
             IFS=$'\n'
             while read line; do echo "::error, line=substring=${line:7:5}::$line"; done < $FICHIER
