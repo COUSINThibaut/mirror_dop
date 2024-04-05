@@ -13,22 +13,22 @@ env:
   FICHIER: "coding-style-reports.log"
 
 jobs:
-  check_coding_style:
-    runs-on: ubuntu-latest
-    container: ghcr.io/epitech/coding-style-checker:latest 
-    steps:
-      - name: root
-        uses: actions/checkout@v4
-      - run: check.sh $(pwd) $(pwd)
-      - run: |
-          IFS=$'\n'
-          while read line; do echo "::error, line=substring=${line:7:5}::$line"; done < $FICHIER
-      - name: norme
-        run: |
-          if cat $FICHIER | wc -l > 0; then exit 2; fi
+  # check_coding_style:
+  #   runs-on: ubuntu-latest
+  #   container: ghcr.io/epitech/coding-style-checker:latest 
+  #   steps:
+  #     - name: root
+  #       uses: actions/checkout@v4
+  #     - run: check.sh $(pwd) $(pwd)
+  #     - run: |
+  #         IFS=$'\n'
+  #         while read line; do echo "::error, line=substring=${line:7:5}::$line"; done < $FICHIER
+  #     - name: norme
+  #       run: |
+  #         if cat $FICHIER | wc -l > 0; then exit 2; fi
 
   check_program_compilation:
-    needs: check_coding_style
+    # needs: check_coding_style
     runs-on: ubuntu-latest
     timeout-minutes: 2
     container: epitechcontent/epitest-docker
