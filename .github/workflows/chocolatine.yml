@@ -19,8 +19,10 @@ jobs:
     steps:
       - name: root
         uses: actions/checkout@v4
-      - run: check.sh $(pwd) $(pwd)
-      - run: |
+      - name: exec norme
+        run: check.sh $(pwd) $(pwd)
+      - name: verif norme and anotate
+        run: |
           if [ -s $FICHIER ]
           then 
             IFS=$'\n'
@@ -36,9 +38,10 @@ jobs:
     steps:
       - name: root
         uses: actions/checkout@v4
-      - run: make
-      - run: make clean
-      - run: |
+      - name: make and make clean
+        run: make && make clean
+      - name: check exist and exec
+        run: |
           if [ -x $EXECUTABLES ]; then echo "$EXECUTABLES OK"; else echo "$EXECUTABLES KO" && exit 1; fi
 
   run_tests:
@@ -49,19 +52,20 @@ jobs:
     steps:
       - name: root
         uses: actions/checkout@v4
-      - run: make tests_run
+      - name: make tests_run
+        run: make tests_run
 
-  push_to_mirror:
-    needs: run_tests
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-      - uses: pixta-dev/repository-mirroring-action@v1
-        with:
-          target_repo_url:
-            ${{ env.MIRROR_URL }}
-          ssh_private_key:
-            ${{ secrets.GIT_SSH_PRIVATE_KEY }}
+  # push_to_mirror:
+  #   needs: run_tests
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: actions/checkout@v4
+  #       with:
+  #         fetch-depth: 0
+  #     - uses: pixta-dev/repository-mirroring-action@v1
+  #       with:
+  #         target_repo_url:
+  #           ${{ env.MIRROR_URL }}
+  #         ssh_private_key:
+  #           ${{ secrets.GIT_SSH_PRIVATE_KEY }}
   
