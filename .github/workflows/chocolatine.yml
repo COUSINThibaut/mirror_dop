@@ -21,7 +21,12 @@ jobs:
         uses: actions/checkout@v4
       - run: check.sh $(pwd) $(pwd)
       - run: |
-          if [ -s $FICHIER ]; then exit 1; else echo "no coding style error"; fi
+          if [ -s $FICHIER ]
+          then 
+            IFS=$'\n'
+            while read line; do echo "::error, line=substring=${line:7:5}::$line"; done < $FICHIER
+            exit 1
+          else echo "no coding style error"; fi
 
   check_program_compilation:
     needs: check_coding_style
