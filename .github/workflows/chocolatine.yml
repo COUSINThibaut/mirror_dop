@@ -20,7 +20,8 @@ jobs:
       - name: root
         uses: actions/checkout@v4
       - run: check.sh $(pwd) $(pwd)
-      - run: cat $FICHIER
+      - run: |
+          if [ -s $FICHIER ]; then exit 1; else echo "no coding style error"; fi
 
   check_program_compilation:
     needs: check_coding_style
