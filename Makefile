@@ -19,7 +19,7 @@ SRC	=	src/mysh.c				\
 		lib/my/my_strncat.c			\
 		lib/my/my_getnbr.c			\
 		lib/my/my_str_to_word_cmd_array.c	\
-		src/cd.c				
+		src/cd.c				\
 		src/get_line_env.c			\
 		src/env_fonctions.c			\
 		src/clean_str.c				\
@@ -28,7 +28,6 @@ SRC	=	src/mysh.c				\
 		src/exec_cmd.c				\
 		src/gestion_struct.c			\
 		src/right_redirection.c			\
-		src/pipes_exec.c			\
 
 SRCtest	=	tests/test_mysh1.c			\
 		src/gestion_struct.c			\
