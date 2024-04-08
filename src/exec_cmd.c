@@ -23,8 +23,6 @@ static void exit_error(int count_exec, int count, int redirect, char *av)
     }
 }
 
-
-
 char *concat_cmd_line(char *path, char *cmd)
 {
     int len = (my_strlen(path) + my_strlen(cmd) + 2);
